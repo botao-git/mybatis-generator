@@ -130,4 +130,8 @@ public interface PersonMapper {
         "where id = #{id,jdbcType=BIGINT}"
     })
     int updateByPrimaryKey(Person record);
+
+    // @Select("select id,name,age from person where id in ( #{ids} )")  // 注意这里的 # $ 区别
+    @Select("select id,name,age from person where id in ( ${ids} )")
+    List<Person> selectByIds(@Param("ids") String ids);
 }
